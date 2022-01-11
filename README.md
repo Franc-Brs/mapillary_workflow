@@ -42,7 +42,6 @@ Usare tscon dalla cartella sustem32 e mettere nome sessione al posto di tscon et
 Lo script sostanziamente unisce le foto FRONT e BACk fatte da una macchina GoProFusion 360. E' facilmente modificabile e comprensibile, le foto frontali devono essere, pur se in sottocartelle diverse, in cartelle chiamate FRNT, quelle posteriori in cartelle chiamate BACK. Per fare un esempo
 
 ```
-# -*- coding: utf-8 -*-
 folderStrade
 |____ Strada1
      |_______dataXXYYZZZZFRNT
@@ -62,7 +61,6 @@ folderStrade
 Per far girare lo script è necesario installare i requirements.txt, in questo caso ho fatto un ambiente virtuale, la cartella che contiene lo script sarà simile a quanto segue
 
 ```
-# -*- coding: utf-8 -*-
 folder
 |     workflow.py
 |     info.py
