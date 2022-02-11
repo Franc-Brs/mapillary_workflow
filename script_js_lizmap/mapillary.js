@@ -33,11 +33,11 @@ function initMapillary() {
   var map = lizMap.map;
 
   var layer = map.getLayersByName("mapillary-pov");
-
+  
   if (layer.length == 0) {
     layer = new OpenLayers.Layer.Vector("mapillary-pov", {
       styleMap: new OpenLayers.StyleMap({
-        graphicName: "square",
+        graphicName: "triangle",
         pointRadius: 6,
         fill: true,
         fillColor: "red",
@@ -116,7 +116,7 @@ function initMapillary() {
     //https://www.gishosting.gter.it/lizmap-web-client/lizmap/www/index.php/lizmap/service/?repository=dorota&project=demo_progetto&LAYERS=images,rectangles,triangles&QUERY_LAYERS=images,rectangles,triangles&STYLES=predefinito,predefinito,predefinito&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=1101874.865938%2C5634337.640517%2C1102059.09112%2C5634424.229338&FEATURE_COUNT=3&HEIGHT=580&WIDTH=1234&FORMAT=image%2Fpng&INFO_FORMAT=text%2Fhtml&CRS=EPSG%3A3857&I=409&J=172&FI_POINT_TOLERANCE=25&FI_LINE_TOLERANCE=10&FI_POLYGON_TOLERANCE=5
     let url =
     fiurl +
-    "&LAYERS=images&QUERY_LAYERS=images&STYLES=predefinito&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&" +
+    "&LAYERS=images&QUERY_LAYERS=images&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetFeatureInfo&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&" +
     "BBOX=" + bbox +
     "&FEATURE_COUNT=1&" +
     "HEIGHT=" + Math.ceil($('#map').height()) + "&WIDTH=" + Math.ceil($('#map').width()) +
@@ -151,7 +151,7 @@ function initMapillary() {
         activateMlyComponents();
         cleanMlyMessage();
         viewer.moveTo(actualId);
-
+        
         return;
       } catch (error) {
         console.log(error);
@@ -178,7 +178,7 @@ function initMapillary() {
       moveToId(pixel);
 
       // Update feature
-      //feat.attributes.angle = panorama.getPov().heading;
+      //feat.attributes.angle = onPov();
       layer.redraw();
 
       // activate drag
@@ -198,6 +198,7 @@ function initMapillary() {
 
       // Update feature
       //feat.attributes.angle = panorama.getPov().heading;
+      //feat.attributes.angle = onPov();
       layer.redraw();
     },
   });
@@ -237,6 +238,22 @@ function initMapillary() {
     }
   });
 
+  const onPov = async () => {
+    const pov = await viewer.getPointOfView();
+    //const svg = camera.querySelector('svg');
+    //svg.style.transform = rotateArc(pov.bearing);
+    console.log(pov.bearing);
+    if ( layer.features.length == 0 )
+            return;
+
+    layer.features[0].attributes.angle = pov.bearing;
+    layer.redraw();
+    return;
+    //return pov.bearing;
+  };
+
+  viewer.on('pov', onPov);
+
   window.addEventListener("resize", function () {
     viewer.resize();
   });
@@ -259,7 +276,7 @@ function initMapillary() {
           height = (parseFloat(sidemenuStyles.height) * 45) / 100 - 15;
           width = ((parseFloat(headerStyles.width) - parseFloat(sidemenuStyles.width)) * (parseFloat(minidockStyles.maxWidth) - 1)) / 100 - 15;
         }
-
+        lizMap.controls['featureInfo'].deactivate();
         var mlyPano = document.getElementById("mly-pano");
         mlyPano.style.width = width + "px";
         mlyPano.style.height = height + "px";
@@ -278,6 +295,7 @@ function initMapillary() {
         activateImagesLayer();
         deactivateMlyComponents();
         viewer.activateCover();
+        lizMap.controls['featureInfo'].activate();
       }
     },
   });
