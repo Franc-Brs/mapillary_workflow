@@ -109,6 +109,9 @@ function initMapillary() {
   }
 
   function moveToId(pixelF) {
+
+    // for the momento between one image search and another it shows a black screen
+    deactivateMlyComponents();
     var extent = map.getExtent().clone();
     extent = extent.transform(map.getProjection(), "EPSG:3857");
     var bbox = extent.toBBOX();
@@ -147,10 +150,11 @@ function initMapillary() {
           return;
         }
 
+        await viewer.moveTo(actualId);
         viewer.deactivateCover();
         activateMlyComponents();
         cleanMlyMessage();
-        viewer.moveTo(actualId);
+        
         
         return;
       } catch (error) {
@@ -210,7 +214,7 @@ function initMapillary() {
   var { Viewer } = mapillary;
 
   var viewer = new Viewer({
-    accessToken: "MLY|6415653248508990|fcf85d2c10aee8f22b524346cb26a2fb",
+    accessToken: "MLY|XXX'",
     container: "mly-pano", // the ID of our container defined in the HTML body
     //component: { cover: false },
   });
@@ -242,7 +246,7 @@ function initMapillary() {
     const pov = await viewer.getPointOfView();
     //const svg = camera.querySelector('svg');
     //svg.style.transform = rotateArc(pov.bearing);
-    console.log(pov.bearing);
+    
     if ( layer.features.length == 0 )
             return;
 
