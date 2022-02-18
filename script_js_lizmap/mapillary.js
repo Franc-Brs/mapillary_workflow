@@ -92,7 +92,9 @@ function initMapillary() {
     viewer.activateComponent("image");
     viewer.activateComponent("direction");
     viewer.activateComponent("zoom");
-    viewer.deactivateComponent("attribution");
+    viewer.activateComponent("attribution");
+    //adjust the height, for some reason I'm not able to simply set this element to null
+    $('.mapillary-attribution-container').css({height: '22px'});
     viewer.activateComponent("sequence");
   }
 
@@ -101,6 +103,7 @@ function initMapillary() {
     viewer.deactivateComponent("image");
     viewer.deactivateComponent("direction");
     viewer.deactivateComponent("zoom");
+    viewer.deactivateComponent("attribution");
     viewer.deactivateComponent("sequence");
   }
 
@@ -214,7 +217,7 @@ function initMapillary() {
   var { Viewer } = mapillary;
 
   var viewer = new Viewer({
-    accessToken: "MLY|XXX'",
+    accessToken: "MLY|6415653248508990|fcf85d2c10aee8f22b524346cb26a2fb",
     container: "mly-pano", // the ID of our container defined in the HTML body
     //component: { cover: false },
   });
