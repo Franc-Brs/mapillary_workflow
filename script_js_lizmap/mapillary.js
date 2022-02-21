@@ -94,7 +94,7 @@ function initMapillary() {
     viewer.activateComponent("zoom");
     viewer.activateComponent("attribution");
     //adjust the height, for some reason I'm not able to simply set this element to null
-    $('.mapillary-attribution-container').css({height: '22px'});
+    $('.mapillary-attribution-container').css({height: 'auto'});
     viewer.activateComponent("sequence");
   }
 
