@@ -1,10 +1,11 @@
 The script is a workaround at the moment and it is only a draft but it works, even though it can be optimized.
 
-![test](https://user-images.githubusercontent.com/79576081/153572037-791d14e3-a394-4743-b1cd-a4107374c173.gif)
+![test13](https://user-images.githubusercontent.com/79576081/158654070-1e934175-cddd-4219-bfde-40a660a151f9.gif)
 
 and 
 
-![test1](https://user-images.githubusercontent.com/79576081/153572827-0ca1c0ca-3181-470c-8012-ebbe05f38b37.gif)
+![test14](https://user-images.githubusercontent.com/79576081/158654994-275f45f2-673c-4437-b2bc-46f9fe5e8b11.gif)
+
 
 The layer with the points where the photos are located should be loaded with QGIS, with the name "images" (if you change the name you should also change the code, at the moment it works in this way so pay attention to the names of the layers).
 To download the points from mapillay I strongly advise to use the same tools I used, something like this script https://github.com/Franc-Brs/mapillary_workflow/tree/main/download_data
@@ -17,7 +18,7 @@ In the lizmap plugin the images layer should have the popup (auto) enabled (and 
 
 ![image](https://user-images.githubusercontent.com/79576081/153940757-8de2e00b-873a-4c32-9a07-bc9c6e4f8a60.png)
 
-In the QGIS `project properties`at the `QGIS Server` menu you should check the Publish options under the WFS Capabilities tab:
+In the QGIS `project properties` at the `QGIS Server` menu you should check the Publish options under the WFS Capabilities tab:
 
 ![image](https://user-images.githubusercontent.com/79576081/153940218-40d86fce-ab49-42a4-a77e-742d826feadb.png)
 
